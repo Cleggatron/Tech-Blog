@@ -5,7 +5,7 @@ class Post extends Model{
 
 }
 
-Model.init(
+Post.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -34,8 +34,9 @@ Model.init(
         //passes the connection
         sequelize,
         //handle our created at column here
-        timestamps: true,
-        updatedAt: false,
+        timestamps: false,
+        //timestamps: true,
+        //updatedAt: false,
         freezeTableName: true,
         underscored: true,
         //table name
