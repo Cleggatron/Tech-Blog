@@ -1,8 +1,10 @@
 const express = require("express");
+
 const PORT = 3001;
+const sequelize = require("./config/connection")
 
 const app = express();
 
-app.listen(PORT, () => {
-    console.log(`Listening on ${PORT}`)
+sequelize.sync({force: false}).then(() => {
+    app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
 })
