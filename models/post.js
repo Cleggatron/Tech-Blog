@@ -34,9 +34,8 @@ Post.init(
         //passes the connection
         sequelize,
         //handle our created at column here
-        timestamps: false,
-        //timestamps: true,
-        //updatedAt: false,
+        timestamps: true,
+        updatedAt: false,
         freezeTableName: true,
         underscored: true,
         //table name
