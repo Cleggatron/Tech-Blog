@@ -2,8 +2,6 @@ const {Model, DataTypes} = require("sequelize");
 const sequelize = require("../config/connection");
 const bcrypt = require("bcrypt");
 
-//ToDo ADD HOOK FOR PASSWORD bcryption
-
 class User extends Model {
     checkPassword(password) {
         return bcrypt.compareSync(password, this.password)
@@ -32,6 +30,12 @@ User.init(
         }
     },
     {
+        hooks: {
+            beforeCreate: async (newUserdata) => {
+                newUserdata.password = await bcrypt.hash(newUserdata.password, 10);
+                return newUserdata;
+            }
+        },
         //passes the connection
         sequelize,       
         timestamps: false,
