@@ -51,7 +51,7 @@ router.put("/:id", async (req, res) => {
     console.log(content);
 
     try{
-        const updatedPost = Post.update(
+        const updatedPost = await Post.update(
             {
                 title,
                 content
@@ -62,7 +62,7 @@ router.put("/:id", async (req, res) => {
                 }
             }
         )  
-        res.status(200);
+        res.status(200).json(updatedPost);
     }catch(err){
         res.status(500).json(err)
     }
