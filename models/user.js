@@ -1,11 +1,13 @@
 const {Model, DataTypes} = require("sequelize");
 const sequelize = require("../config/connection");
+const bcrypt = require("bcrypt");
 
 //ToDo ADD HOOK FOR PASSWORD bcryption
-//ToDo Add a password comparision method
 
 class User extends Model {
-
+    checkPassword(password) {
+        return bcrypt.compareSync(password, this.password)
+    }
 }
 
 User.init(
