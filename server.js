@@ -2,13 +2,28 @@
 const path = require("path")
 const express = require("express");
 const exphbs = require("express-handlebars")
+const session = require("express-session");
 //file dependencies
 const routers = require("./controllers");
 const sequelize = require("./config/connection")
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+
 
 const PORT = process.env.PORT || 3001;
-
 const app = express();
+
+//set up our session
+const sess = {
+    secret: "placeholder",
+    cookie: {
+        maxAge:  3600000,    
+    },
+    resave: false,
+    saveUninitialized: true,
+    store: new SequelizeStore({
+    db: sequelize
+  })
+}
 
 //set up handlebars
 const hbs = exphbs.create()
@@ -18,10 +33,7 @@ app.set("view engine", "handlebars")
 //standard middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
-//set up static assets 
-//TODO: Build static assets
 app.use(express.static(path.join(__dirname, "public")));
-
 
 //set up our routing
 app.use(routers)
