@@ -26,5 +26,24 @@ router.get("/:id", async (req, res) => {
     }
 })
 
+//user can add new posts to their dashboard
+router.post("/:id", async (req, res) => {
+    
+    const user_id = req.params.id;
+    const {title, content} = req.body;
+
+    try{
+        const newPost = await Post.create({
+            title,
+            content, 
+            user_id
+        })
+
+        res.status(200).json(newPost)
+    }catch(err){
+        res.status(400).json(err)
+    }
+})
+
 
 module.exports = router;
