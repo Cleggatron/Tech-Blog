@@ -15,9 +15,6 @@ const app = express();
 //set up our session
 const sess = {
     secret: "placeholder",
-    cookie: {
-        maxAge:  3600000,    
-    },
     resave: false,
     saveUninitialized: true,
     store: new SequelizeStore({
