@@ -12,16 +12,18 @@ router.get("/", async (req, res) => {
             {
                 attributes: ["id", "user_id", "title", "content"],
                 where: {
-                    user_id: req.session.user_id
+                    user_id: 1
                 }
             }
-        ).catch(err => {
-           res.json(err);
-        })
-
+        )
+        
         //trim down our data to the bare essentials
-        const dashData = dashDbData.map(post => post.get({plain : true}));
-        res.json(dashData)
+        const userPosts = dashDbData.map(post => post.get({plain : true}));
+        
+        res.render("dashboard",{
+            userPosts,
+            logged_in: req.session.logged_in
+        })
         
     } catch(err) {
         console.log(err)
@@ -30,9 +32,9 @@ router.get("/", async (req, res) => {
 })
 
 //user can add new posts to their dashboard
-router.post("/:user_id", async (req, res) => {
+router.post("/", async (req, res) => {
     
-    const user_id = req.params.user_id;
+    const user_id = req.session.user_id;
     const {title, content} = req.body;
 
     try{
@@ -48,6 +50,7 @@ router.post("/:user_id", async (req, res) => {
     }
 })
 
+//user can update posts
 router.put("/:id", async (req, res) => {
     const {title , content} =  req.body;
     console.log(title);
