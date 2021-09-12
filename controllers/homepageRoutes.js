@@ -46,7 +46,24 @@ router.get("/single/:id", async (req,res) => {
                 attributes: ["username"]
             },
         })
+
+        const commentDataDb = await Comment.findAll({
+            where: {
+                post_id: req.params.id
+            },
+            attributes: ["id", "content", "createdAt"],
+            include: {
+                model: User,
+                attributes: ["username"]
+            }
+        })
+
         const postData = await postDataDb.get({plain : true})
+        const commentData = await commentDataDb.map(comment => comment.get({plain: true}))
+        
+        postData.comments = commentData
+        console.log(postData);
+        console.log(commentData)
 
         res.render("post", {
             postData,

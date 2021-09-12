@@ -5,7 +5,10 @@
     <p>{{postData.createdAt}}</p>
 </div>
 
-<h2>Comment</h2>
+{{#each postData.comments}}
+{{>commentCard}}
+{{/each}}
+
 <form action="submit" id="comment-form">
     <div>
         <label for="comement-text">Comment: </label>
