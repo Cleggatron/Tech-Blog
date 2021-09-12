@@ -34,6 +34,11 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req,res) => {
     try {
+        if(!req.session.logged_in){
+            res.redirect("/login");
+            return;
+        }
+
         const postDataDb = await Post.findByPk(req.params.id,{
             attributes: ["id", "title","content", "createdAt"],
             include: {
@@ -42,7 +47,6 @@ router.get("/:id", async (req,res) => {
             },
         })
         const postData = await postDataDb.get({plain : true})
-        console.log(postData);
 
         res.render("post", {
             postData,
