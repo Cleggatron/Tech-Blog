@@ -32,7 +32,7 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.get("/:id", async (req,res) => {
+router.get("/single/:id", async (req,res) => {
     try {
         if(!req.session.logged_in){
             res.redirect("/login");
