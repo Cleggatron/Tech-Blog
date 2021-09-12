@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
         //get our raw data
         const homepageData = await Post.findAll(
             {
-                attributes: ["title", "createdAt"],
+                attributes: ["id", "title", "createdAt"],
                 include: {
                     model: User,
                     attributes: ["username"]
