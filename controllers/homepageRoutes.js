@@ -1,4 +1,4 @@
-const {User, Post} = require("../models");
+const {User, Post, Comment} = require("../models");
 
 const router = require("express").Router();
 
@@ -28,6 +28,28 @@ router.get("/", async (req, res) => {
         })
 
     }catch(err){
+        res.status(500).json(err);
+    }
+})
+
+router.get("/:id", async (req,res) => {
+    try {
+        const postDataDb = await Post.findByPk(req.params.id,{
+            attributes: ["id", "title","content", "createdAt"],
+            include: {
+                model: User,
+                attributes: ["username"]
+            },
+        })
+        const postData = await postDataDb.get({plain : true})
+        console.log(postData);
+
+        res.render("post", {
+            postData,
+            logged_in: req.session.logged_in
+        })
+        
+    } catch (err) {
         res.status(500).json(err);
     }
 })
