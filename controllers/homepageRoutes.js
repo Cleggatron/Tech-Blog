@@ -3,6 +3,9 @@ const {User, Post} = require("../models");
 const router = require("express").Router();
 
 router.get("/", async (req, res) => {
+
+    console.log(req.session.user_id);
+    console.log(req.session.logged_in);
     try{
         //get our raw data
         const homepageData = await Post.findAll(
