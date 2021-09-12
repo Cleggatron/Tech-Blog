@@ -62,8 +62,6 @@ router.get("/single/:id", async (req,res) => {
         const commentData = await commentDataDb.map(comment => comment.get({plain: true}))
         
         postData.comments = commentData
-        console.log(postData);
-        console.log(commentData)
 
         res.render("post", {
             postData,
