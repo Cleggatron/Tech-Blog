@@ -4,6 +4,12 @@ const router = require("express").Router()
 //this will return the posts unique to the user_id
 router.get("/:user_id", async (req, res) => {
     try{
+        //redirect if not logged in
+        if(!req.session.logged_in){
+            res.redirect("/login");
+            return;
+        }
+        
         //get our data in raw format
         const dashDbData = await Post.findAll(
             {
