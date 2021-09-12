@@ -16,7 +16,7 @@ const newCommentHandler = async (event) => {
         })
 
         if(response.ok){
-            
+            location.reload()            
         }else{
             alert("Failed to create comment.")
         }
