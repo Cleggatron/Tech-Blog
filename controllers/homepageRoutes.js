@@ -32,13 +32,14 @@ router.get("/", async (req, res) => {
     }
 })
 
+//handles looking at an individual post
 router.get("/single/:id", async (req,res) => {
     try {
         if(!req.session.logged_in){
             res.redirect("/login");
             return;
         }
-
+        //get the post data
         const postDataDb = await Post.findByPk(req.params.id,{
             attributes: ["id", "title","content", "createdAt"],
             include: {
@@ -46,7 +47,7 @@ router.get("/single/:id", async (req,res) => {
                 attributes: ["username"]
             },
         })
-
+        //get the comments for the post
         const commentDataDb = await Comment.findAll({
             where: {
                 post_id: req.params.id
@@ -58,9 +59,10 @@ router.get("/single/:id", async (req,res) => {
             }
         })
 
+        //clean up our data
         const postData = await postDataDb.get({plain : true})
         const commentData = await commentDataDb.map(comment => comment.get({plain: true}))
-        
+        //append the comments to the post
         postData.comments = commentData
 
         res.render("post", {
