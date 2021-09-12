@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
             {
                 attributes: ["id", "user_id", "title", "content"],
                 where: {
-                    user_id: 1
+                    user_id: req.session.user_id
                 }
             }
         )
@@ -28,6 +28,25 @@ router.get("/", async (req, res) => {
     } catch(err) {
         console.log(err)
         res.status(500).end()
+    }
+})
+
+//get a single post for editing
+router.get("/singlepost/:id", async (req, res) =>{
+    try{
+        const postDbData = await Post.findByPk(req.params.id, {
+            attributes: ["id", "title", "content"]
+        })
+
+        const postData = postDbData.get({plain:true});
+        console.log(postData)
+
+        res.render("singlePost", {
+            postData,
+            logged_in: req.session.logged_in
+        })
+    }catch(err){
+
     }
 })
 
