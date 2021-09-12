@@ -22,7 +22,8 @@ router.get("/", async (req, res) => {
         
         //render the page using handlebars
         res.render("homepage", {
-            posts
+            posts, 
+            logged_in: req.session.logged_in
         })
 
     }catch(err){

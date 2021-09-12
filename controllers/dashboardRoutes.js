@@ -2,7 +2,7 @@ const {User, Post, Comment} = require("../models")
 const router = require("express").Router()
 
 //this will return the posts unique to the user_id
-router.get("/:user_id", async (req, res) => {
+router.get("/", async (req, res) => {
     try{
         //redirect if not logged in
         if(!req.session.logged_in){
@@ -15,7 +15,7 @@ router.get("/:user_id", async (req, res) => {
             {
                 attributes: ["id", "user_id", "title", "content"],
                 where: {
-                    user_id: req.params.user_id
+                    user_id: req.session.user_id
                 }
             }
         ).catch(err => {
