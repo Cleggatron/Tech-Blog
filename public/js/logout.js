@@ -11,7 +11,7 @@ const logoutSession = async (event) => {
     if(response.ok){
         document.location.replace("/");
     }else {
-        alery(response.statusText);
+        alert(response.statusText);
     }
 }
 
