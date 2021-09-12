@@ -70,11 +70,9 @@ router.post("/", async (req, res) => {
 })
 
 //user can update posts
-router.put("/:id", async (req, res) => {
+router.put("/singlepost/:id", async (req, res) => {
     const {title , content} =  req.body;
-    console.log(title);
-    console.log(content);
-
+    console.log(title, content);
     try{
         const updatedPost = await Post.update(
             {
@@ -90,6 +88,20 @@ router.put("/:id", async (req, res) => {
         res.status(200).json(updatedPost);
     }catch(err){
         res.status(500).json(err)
+    }
+})
+
+router.delete("/:id", async (req, res) => {
+    try{
+        const deleteRequest = await Post.destroy({
+            where: {
+                id: req.params.id
+            }
+        })
+
+        res.status(200).json(deleteRequest);
+    }catch(err){
+        res.status(500).json(err);
     }
 })
 
