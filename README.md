@@ -24,9 +24,9 @@
 
   ## Usage
 
-  ![File In Action]()
+  ![File In Action](./Assets/Screenshot.PNG)
 
-  Once it is live you can login, using the login screen. Then navigating to the dashboard will allow you to create a new post, and clicking onto the displayed posts will allow editing/deletion. ]
+  Once it is live you can login, using the login screen. Then navigating to the dashboard will allow you to create a new post, and clicking onto the displayed posts will allow editing/deletion. 
 
   ## Credits
 
