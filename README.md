@@ -2,7 +2,7 @@
 
   [Project Repo](https://github.com/Cleggatron/Tech-Blog)
   
-  [Deployed Project](https://radiant-brook-42012.herokuapp.com/)
+  [Deployed Project](https://whispering-dawn-83042.herokuapp.com/)
   
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
