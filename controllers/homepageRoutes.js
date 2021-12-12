@@ -20,6 +20,11 @@ router.get("/", async (req, res) => {
         
         //trim back the data to a manageable format
         const posts = homepageData.map(post => post.get({plain: true}));
+
+        posts.forEach(post => {
+            const date = new Date(post.createdAt).toLocaleDateString();
+            post.createdAt = date
+        });
         
         //render the page using handlebars
         res.render("homepage", {
