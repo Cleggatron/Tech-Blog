@@ -66,6 +66,7 @@ router.get("/single/:id", async (req,res) => {
 
         //clean up our data
         const postData = await postDataDb.get({plain : true})
+        postData.createdAt = new Date(postData.createdAt).toLocaleDateString();
         const commentData = await commentDataDb.map(comment => comment.get({plain: true}))
         //append the comments to the post
         postData.comments = commentData
